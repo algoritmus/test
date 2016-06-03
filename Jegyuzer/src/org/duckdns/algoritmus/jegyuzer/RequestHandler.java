@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
@@ -20,17 +19,13 @@ public class RequestHandler {
 	private static final String dbURL="jdbc:mysql://192.168.0.21:3306/jegyuzer";
 	private static Connection conn = null;
     private static Statement stmt = null;
-    //private static final String HTML_START="<html><body>";
-    //private static final String HTML_END="</body></html>";
     private static final String tableName="requests";
 	
 	@GET
 	@Produces(MediaType.TEXT_HTML)
 	public String showRequests(){
 		createConnection();
-		List<List<String>> result = Utils.selectStarRequests(conn, stmt, tableName);
-		return Utils.generateTable(result,"REQUESTS");
-		
+		return Utils.getAllResultsAsJson(conn, stmt, tableName);
 	}
 
 	@POST

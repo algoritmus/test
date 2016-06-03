@@ -8,6 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 public class Utils {
 
 	public static String generateTable(List<List<String>> result,String title) {
@@ -36,8 +39,17 @@ public class Utils {
 		return table;
 	}
 
-	public static List<List<String>> selectStarRequests(Connection conn,Statement stmt,String tableName) {
-		List<List<String>> result= new ArrayList<List<String>>();
+	public static String getDataFromDbAsJson(){
+		
+		
+		
+		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static String getAllResultsAsJson(Connection conn,Statement stmt,String tableName) {
+		JSONArray jArray = new JSONArray();
+		JSONObject jObject = new JSONObject(); 
 		try
         {
             stmt = conn.createStatement();
@@ -45,28 +57,17 @@ public class Utils {
             ResultSetMetaData rsmd = results.getMetaData();
             int numberCols = rsmd.getColumnCount();
             
-            List<String> header= new ArrayList<String>();
-            
-            for (int i=1; i<=numberCols; i++)
-            {
-                //print Column Names
-                
-                header.add(rsmd.getColumnLabel(i));
-               
-            }
-            result.add(header);
-            
-
             while(results.next())
             {
             	List<String> record= new ArrayList<String>();
             	record.add(results.getTimestamp(1).toString());
-            	for (int i=2; i<=numberCols; i++)
+            	jObject.put(rsmd.getColumnLabel(1),results.getTimestamp(1).toString());
+            	for (int i=2; i<numberCols; i++)
                 {
-            		record.add(results.getString(i));
-                   
+            		jObject.put(rsmd.getColumnLabel(i),results.getTimestamp(i));
                 }
-                result.add(record);
+            	jObject.put(rsmd.getColumnLabel(numberCols),results.getTimestamp(numberCols));
+            	jArray.add(jObject);
             }
             results.close();
             stmt.close();
@@ -76,7 +77,7 @@ public class Utils {
         {
             sqlExcept.printStackTrace();
         }
-		return result;
+		return jArray.toString();
 	}
 
 }
