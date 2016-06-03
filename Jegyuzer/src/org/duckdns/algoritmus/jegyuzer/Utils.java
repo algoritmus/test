@@ -64,9 +64,9 @@ public class Utils {
             	jObject.put(rsmd.getColumnLabel(1),results.getTimestamp(1).toString());
             	for (int i=2; i<numberCols; i++)
                 {
-            		jObject.put(rsmd.getColumnLabel(i),results.getTimestamp(i));
+            		jObject.put(rsmd.getColumnLabel(i),results.getString(i));
                 }
-            	jObject.put(rsmd.getColumnLabel(numberCols),results.getTimestamp(numberCols));
+            	jObject.put(rsmd.getColumnLabel(numberCols),results.getInt(numberCols));
             	jArray.add(jObject);
             }
             results.close();

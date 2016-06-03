@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="./javascripts/jquery.dynatable.js"></script>
 <script>
 $.ajaxSetup ({
     // Disable caching of AJAX responses
@@ -18,18 +19,21 @@ $(document).ready(function(){
 	$("li").mouseleave(function(){
 		$(this).css("text-decoration","none");
 	});
-	$("#requests").click(function(){
-		$("#content").text("Please wait...");
-		$.get("./ju/request",function(data,response){
-			$("#content").html(data);
-		});
-	});
 	$("#results").click(function(){
-		$("#content").text("Please wait...");
-		$.get("./ju/result",function(data,response){
-			$("#content").html(data);
+		$.ajax({
+			url:"./ju/request",
+			async:false,
+			success:function(data){
+				$("#result-table").dynatable({
+					  dataset: {
+					    records: data
+					  }}
+				  )
+				},
 		});
+				
 	});
+
 	
 	$("#form").click(function(){
 		$("#content").text("Please wait...");
@@ -55,6 +59,22 @@ $(document).ready(function(){
 <li id="requests">Show requests</li>
 <li id="results">show results</li>
 </ul>
-<div id="content"></div>
+<table id="result-table">
+<thead>
+<th>Query_time</th>
+<th>emailaddr</th>
+<th>origin</th>
+<th>destination</th>
+<th>fromdate</th>
+<th>todate</th>
+<th>adults</th>
+<th>infants</th>
+<th>departure</th>
+<th>arrival</th>
+<th>price</th>
+</thead>
+<tbody>
+</tbody>
+</table>
 </body>
 </html>

@@ -17,7 +17,7 @@ public class Resulthandler {
     private static final String tableName="results";
 	
 	@GET
-	@Produces(MediaType.TEXT_HTML)
+	@Produces(MediaType.APPLICATION_JSON)
 	public String showRequests(){
 		createConnection();
 		return Utils.getAllResultsAsJson(conn,stmt,tableName);
