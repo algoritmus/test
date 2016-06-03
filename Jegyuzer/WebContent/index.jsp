@@ -21,7 +21,7 @@ $(document).ready(function(){
 	});
 	$("#results").click(function(){
 		$.ajax({
-			url:"./ju/request",
+			url:"./ju/result",
 			async:false,
 			success:function(data){
 				$("#result-table").dynatable({
