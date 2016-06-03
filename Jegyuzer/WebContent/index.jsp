@@ -8,7 +8,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script>
 $.ajaxSetup ({
-    // Disable caching of AJAX responses new things
+    // Disable caching of AJAX responses
     cache: false
 });
 $(document).ready(function(){
