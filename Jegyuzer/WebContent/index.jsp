@@ -7,18 +7,16 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script src="./javascripts/jquery.dynatable.js"></script>
+
+<link rel="stylesheet" media="all" href="./css/jquery.dynatable.css">
+
 <script>
 $.ajaxSetup ({
     // Disable caching of AJAX responses
     cache: false
 });
 $(document).ready(function(){
-	$("li").mouseenter(function(){
-		$(this).css("text-decoration","underline");
-	});
-	$("li").mouseleave(function(){
-		$(this).css("text-decoration","none");
-	});
+	
 	$("#results").click(function(){
 		$.ajax({
 			url:"./ju/result",
@@ -33,22 +31,6 @@ $(document).ready(function(){
 		});
 				
 	});
-
-	
-	$("#form").click(function(){
-		$("#content").text("Please wait...");
-		$("#content").load("newrequest.html");
-
-	});
-	
-	
-	$("#send").click( function() {
-		$("#content").text("Request has been sent !");
-	});
-
-
-
-
 });
 </script>
 </head>
@@ -59,8 +41,9 @@ $(document).ready(function(){
 <li id="requests">Show requests</li>
 <li id="results">show results</li>
 </ul>
-<table id="result-table">
+<table id="result-table" class="table table-bordered">
 <thead>
+<tr>
 <th>Query_time</th>
 <th>emailaddr</th>
 <th>origin</th>
@@ -72,6 +55,7 @@ $(document).ready(function(){
 <th>departure</th>
 <th>arrival</th>
 <th>price</th>
+</tr>
 </thead>
 <tbody>
 </tbody>
