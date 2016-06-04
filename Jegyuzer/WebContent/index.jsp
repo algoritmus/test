@@ -41,7 +41,7 @@ $(document).ready(function(){
 <li id="requests">Show requests</li>
 <li id="results">show results</li>
 </ul>
-<table id="result-table" class="table table-bordered">
+<table id="result-table" class="table table-bordered" border="1">
 <thead>
 <tr>
 <th>Query_time</th>
