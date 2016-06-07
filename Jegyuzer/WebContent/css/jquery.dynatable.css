@@ -8,17 +8,25 @@
  *
  * Date: Tue Jan 02 2014
  */
+
+table {
+    border-collapse: collapse;
+}
+td {
+    border: 1px solid black;
+}
+
+th {
+  background-color: #4CAF50;
+  border: 1px solid black;
+}
 th a {
   color: white;
-  background-color: #4CAF50;
+  
 }
 th a:hover {
   color: white;
-  background-color: #4CAF50
   text-decoration: underline;
-}
-tr:hover {
-	background-color: #729fcf
 }
 
 tr:nth-child(even) {
