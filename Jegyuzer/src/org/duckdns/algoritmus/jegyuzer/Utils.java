@@ -49,7 +49,7 @@ public class Utils {
 	@SuppressWarnings("unchecked")
 	public static String getAllResultsAsJson(Connection conn,Statement stmt,String tableName) {
 		JSONArray jArray = new JSONArray();
-		JSONObject jObject = new JSONObject(); 
+		
 		try
         {
             stmt = conn.createStatement();
@@ -59,8 +59,7 @@ public class Utils {
             
             while(results.next())
             {
-            	List<String> record= new ArrayList<String>();
-            	record.add(results.getTimestamp(1).toString());
+            	JSONObject jObject = new JSONObject(); 
             	jObject.put(rsmd.getColumnLabel(1),results.getTimestamp(1).toString());
             	for (int i=2; i<numberCols; i++)
                 {
