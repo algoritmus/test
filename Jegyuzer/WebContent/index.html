@@ -6,7 +6,21 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script src="./javascripts/jquery.dynatable.js"></script>
 <link rel="stylesheet" media="all" href="./css/jquery.dynatable.css">
-
+<script>
+function openCity(evt, page) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(page).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+</script>
 
 <script>
 $.ajaxSetup ({
@@ -35,11 +49,12 @@ $(document).ready(function(){
 </head>
 <body>
 <div>Select menu</div>
-<ul>
-<li id="form">Submit new request</li>
-<li id="requests">Show requests</li>
-<li id="results">show results</li>
+<ul class="tab">
+  <li><a href="#" class="tablinks" onclick="openCity(event, 'Results')">Results</a></li>
+  <li><a href="#" class="tablinks" onclick="openCity(event, 'Requests')">Requests</a></li>
+  <li><a href="#" class="tablinks" onclick="openCity(event, 'New')">New request</a></li>
 </ul>
+<div id="Results" class="tabcontent">
 <table id="result-table" class="table table-bordered" border="1">
 <thead>
 <tr>
@@ -59,5 +74,10 @@ $(document).ready(function(){
 <tbody>
 </tbody>
 </table>
+</div>
+<div id="Requests" class="tabcontent">
+</div>
+<div id="New" class="tabcontent">
+</div>
 </body>
 </html>
