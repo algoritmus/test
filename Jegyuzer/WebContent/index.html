@@ -14,7 +14,7 @@ $.ajaxSetup ({
     cache: false
 });
 $(document).ready(function(){
-	
+	$("#result-table").hide();
 	$("#results").click(function(){
 		$.ajax({
 			url:"./ju/result",
@@ -24,7 +24,8 @@ $(document).ready(function(){
 					  dataset: {
 					    records: data
 					  }}
-				  )
+				  );
+				  $("#result-table").show();
 				},
 		});
 				
