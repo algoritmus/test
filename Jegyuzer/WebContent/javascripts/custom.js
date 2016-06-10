@@ -3,7 +3,7 @@ $.ajaxSetup ({
     cache: false
 });
 $(document).ready(function(){
-	//$("#result-table").hide();
+	$("#div_Result").hide();
 	
 	$("#Results").click(function(){
 		openTab("Results");
@@ -16,7 +16,7 @@ $(document).ready(function(){
 					    records: data
 					  }}
 				  );
-				  $("#result-table").show();
+				  $("#div_Result").show();
 				},
 		});
 				
