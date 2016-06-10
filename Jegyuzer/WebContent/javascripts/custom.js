@@ -4,6 +4,16 @@ $.ajaxSetup ({
 });
 $(document).ready(function(){
 	$("#div_Result").hide();
+	$("#Results").click(function(){
+		alert("Request click")
+	});
+	$("#New").click(function(){
+		alert("New click")
+	});
+
+	
+	
+	
 	
 	$("#Results").click(function(){
 		openTab("Results");
