@@ -4,7 +4,9 @@ $.ajaxSetup ({
 });
 $(document).ready(function(){
 	//$("#result-table").hide();
+	
 	$("#Results").click(function(){
+		openTab("Results");
 		$.ajax({
 			url:"./ju/result",
 			async:false,
@@ -21,7 +23,7 @@ $(document).ready(function(){
 	});
 });
 
-function openCity(evt, page) {
+function openTab(page) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
@@ -32,6 +34,6 @@ function openCity(evt, page) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
     document.getElementById(page).style.display = "block";
-    evt.currentTarget.className += " active";
+    document.getElementById(page).className += " active";
     
 }
