@@ -4,7 +4,7 @@ $.ajaxSetup ({
 });
 $(document).ready(function(){
 	$("#div_Result").hide();
-	$("#Results").click(function(){
+	$("#Requests").click(function(){
 		alert("Request click")
 	});
 	$("#New").click(function(){
