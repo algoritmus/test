@@ -1,47 +1,44 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<script src="./javascripts/jquery.dynatable.js"></script>
-<script src="./javascripts/custom.js"></script>
-<link rel="stylesheet" media="all" href="./css/jquery.dynatable.css">
-
-
-
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Insert title here</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script src="./javascripts/jquery.dynatable.js"></script>
+	<script src="./javascripts/custom.js"></script>
+	<link rel="stylesheet" media="all" href="./css/jquery.dynatable.css">
 </head>
-<body>
-<div>Select menu</div>
-<ul class="tab">
-  <li><a href="#" class="tablinks" onclick="openCity(event, 'Results')">Results</a></li>
-  <li><a href="#" class="tablinks" onclick="openCity(event, 'Requests')">Requests</a></li>
-  <li><a href="#" class="tablinks" onclick="openCity(event, 'New')">New request</a></li>
-</ul>
-<div id="Results" class="tabcontent">
-<table id="result-table" class="table table-bordered" border="1">
-<thead>
-<tr>
-<th>Query_time</th>
-<th>emailaddr</th>
-<th>origin</th>
-<th>destination</th>
-<th>fromdate</th>
-<th>todate</th>
-<th>adults</th>
-<th>infants</th>
-<th>departure</th>
-<th>arrival</th>
-<th>price</th>
-</tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</div>
-<div id="Requests" class="tabcontent">
-</div>
-<div id="New" class="tabcontent">
-</div>
-</body>
+	<body>
+		<ul class="tab">
+		  <li><a href="#" class="tablinks" >Results</a></li>
+		  <li><a href="#" class="tablinks" ">Requests</a></li>
+		  <li><a href="#" class="tablinks" ">New request</a></li>
+		</ul>
+		<div id="Results" class="tabcontent">
+			<table id="result-table" class="table table-bordered" border="1">
+				<thead>
+					<tr>
+						<th>Query_time</th>
+						<th>emailaddr</th>
+						<th>origin</th>
+						<th>destination</th>
+						<th>fromdate</th>
+						<th>todate</th>
+						<th>adults</th>
+						<th>infants</th>
+						<th>departure</th>
+						<th>arrival</th>
+						<th>price</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+		<div id="Requests" class="tabcontent">
+		requests
+		</div>
+		<div id="New" class="tabcontent">
+		new
+		</div>
+	</body>
 </html>
