@@ -12,6 +12,7 @@
 table {
     border-collapse: collapse;
     box-shadow: 5px 5px 3px #d3d3d3;
+    margin: 0 auto;
 }
 td {
     border: 1px solid black;
