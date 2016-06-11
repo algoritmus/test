@@ -1,18 +1,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Insert title here</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 	<script src="./javascripts/jquery.dynatable.js"></script>
-	<script src="./javascripts/custom.js"></script>
-	<link rel="stylesheet" media="all" href="./css/jquery.dynatable.css">
-</head>
+
+
+
 	<body>
 		<ul class="tab">
-		  <li id="Results"><a  href="#" class="tablinks">Results</a></li>
-		  <li id="Results"><a  href="#" class="tablinks">Requests</a></li>
-		  <li id="New"><a  href="#" class="tablinks">New request</a></li>
+		  <li><a id="Results" href="#" class="tablinks">Results</a></li>
+		  <li><a  id="Requests" href="#" class="tablinks">Requests</a></li>
+		  <li><a id="New"  href="#" class="tablinks">New request</a></li>
 		</ul>
 		<div id="div_Results" class="tabcontent">
 			<table id="result-table" class="table table-bordered" border="1">
@@ -31,14 +28,21 @@
 						<th>price</th>
 					</tr>
 				</thead>
-				<tbody></tbody>
+				<tbody>
+				  <tr>
+          <td>test</td>
+          </tr>
+				  <tr>
+          <td>test</td>
+          </tr>
+
+</tbody>
 			</table>
 		</div>
 		<div id="div_Requests" class="tabcontent">
-		requests
+		  requests
 		</div>
 		<div id="div_New" class="tabcontent">
-		new
+		  new
 		</div>
 	</body>
-</html>

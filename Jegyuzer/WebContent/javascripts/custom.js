@@ -5,10 +5,14 @@ $.ajaxSetup ({
 $(document).ready(function(){
 	$("#div_Result").hide();
 	$("#Requests").click(function(){
-		alert("Request click")
+		openTab("Requests");
+    
+    
 	});
 	$("#New").click(function(){
-		alert("New click")
+		openTab("New");
+    
+    
 	});
 
 	
@@ -26,10 +30,9 @@ $(document).ready(function(){
 					    records: data
 					  }}
 				  );
-				  $("#div_Result").show();
 				},
 		});
-				
+		$("#div_Results").show();		
 	});
 });
 
@@ -43,6 +46,7 @@ function openTab(page) {
     for (i = 0; i < tablinks.length; i++) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
+    document.getElementById("div_"+page).style.display = "block";
     document.getElementById(page).style.display = "block";
     document.getElementById(page).className += " active";
     
