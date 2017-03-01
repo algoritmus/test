@@ -80,7 +80,7 @@ public class NcoreUtils {
 		
 		
 		String url = "https://ncore.cc/torrents.php?oldal=" + i + "&miben=name&tipus=kivalasztottak_kozott&kivalasztott_tipus=" + tipus + "&mire=" + titleFilter;
-		//System.out.println("Loading page number: " + i);
+		System.out.println("Loading page number: " + i);
 		driver.get(url);
 	}
 	
