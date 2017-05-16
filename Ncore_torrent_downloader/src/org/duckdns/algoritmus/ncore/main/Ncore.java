@@ -72,7 +72,7 @@ public class Ncore {
 			DBUtils.createTable(conn);
 			
     		String key = NcoreUtils.login(driver, "Algoritmus", "NCorejelszo123");
-			NcoreUtils.searchTorrents(driver, conn, key,"lucifer s02 720", "hdser", false);
+			NcoreUtils.searchTorrents(driver, conn, key, "lucifer s02 720", "hdser", false);
 
 			
 			

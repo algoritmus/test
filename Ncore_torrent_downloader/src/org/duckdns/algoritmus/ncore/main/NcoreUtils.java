@@ -28,18 +28,23 @@ public class NcoreUtils {
 	        driver.findElement(By.xpath("//input[@class='beviteliMezo' and @name='nev']")).sendKeys("Algoritmus");
 	        driver.findElement(By.xpath("//input[@class='beviteliMezo' and @name='pass']")).sendKeys("NCorejelszo123");
 	        driver.findElement(By.xpath("//input[@type='submit']")).click();
-	        return driver.findElement(By.xpath("//div[@class='torrent_lenyilo']//a")).getAttribute("href").split("key=")[1]; 
+	        return driver.findElement(By.xpath("//link[@rel='alternate']")).getAttribute("href").split("key=")[1];
+	        
 	}
 	
 	public static void searchTorrents(WebDriver driver, Connection conn, String key, String filter, String type, boolean getAll){
-		//https://ncore.cc/torrents.php?oldal=2&tipus=all_own&mire=lucifer&miben=name
-		filter=filter.replaceAll(" ", "%20");
-		driver.get("https://ncore.cc/torrents.php?&tipus=all_own&miben=name&mire=" + filter + "&tipus=kivalasztottak_kozott&kivalasztott_tipus=" + type);
-		List<WebElement> torrents = driver.findElements(By.xpath("//div[@class='box_torrent']"));
-		
-		for(WebElement torrent:torrents){
-			try{
-								
+		try{
+			//https://ncore.cc/torrents.php?oldal=2&tipus=all_own&mire=lucifer&miben=name
+			filter=filter.replaceAll(" ", "%20");
+			System.out.println(filter);
+			driver.get("https://ncore.cc/torrents.php?&tipus=all_own&miben=name&mire=" + filter + "&tipus=kivalasztottak_kozott&kivalasztott_tipus=" + type);
+			List<WebElement> torrents = driver.findElements(By.xpath("//div[@class='box_torrent']"));
+			
+			for(WebElement torrent:torrents){
+				System.out.println("for loop");
+			
+				//String key = driver.findElement(By.xpath("//link[@rel='alternate']")).getAttribute("href").split("key=")[1];				
+				System.out.println(key);
 				WebElement torrent_txt = torrent.findElement(By.xpath(".//div[@class='torrent_txt']/a"));
 				String name = torrent_txt.getAttribute("title");
 				String torrentId = torrent_txt.getAttribute("href").split("id=")[1];
@@ -69,20 +74,17 @@ public class NcoreUtils {
 				}else{
 					System.out.println("Already downloaded:" + key);
 				};
+
+				if(!getAll){
+					break;
+				}
+			}//end of for loop		
+
+		}
+		catch(Exception e){
+				e.printStackTrace();
 				
-				
-				
-	
-					
-			}
-			catch(Exception e){
-					//e.printStackTrace();
-					
-			}
-			if(!getAll){
-				break;
-			}
-		}//end of for loop		
+		}
 
 	}// end of searchTorrents
 
