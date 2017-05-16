@@ -1,27 +1,16 @@
 package org.duckdns.algoritmus.ncore.main;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
@@ -32,13 +21,17 @@ public class Ncore {
 	static String type;
 	static boolean getAll;
 	static String key;
+	static String dropTable = "";
+	static List<String> searchList;
 	public static void main(String[] args) {
 		
 		
 		long start = System.currentTimeMillis();
 		
 		java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF); 
-		String dropTable = args[0];
+		if (args.length > 0){
+			dropTable = args[0];
+		}
 		//String output = args[1];
 		
 
@@ -57,7 +50,7 @@ public class Ncore {
     	
 
     	try{
-    		readSearchItems();
+    		readSearchListFromFile();
    		
 			conn = DBUtils.connectionToDerby(null);
 			
@@ -65,8 +58,13 @@ public class Ncore {
 			DBUtils.createTable(conn);
 			
     		key = NcoreUtils.login(driver, "Algoritmus", "NCorejelszo123");
-			NcoreUtils.findNewTorrents(driver, conn, key, keyword, type, getAll);
-	      
+			for(String line:searchList){
+				keyword = line.split(",")[0];
+				type = line.split(",")[1];
+				getAll = Boolean.parseBoolean(line.split(",")[2]);
+				NcoreUtils.findNewTorrents(driver, conn, key, keyword, type, getAll);
+			}
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
@@ -76,16 +74,10 @@ public class Ncore {
 	        System.out.println("Running time: " + duration + "s");
 		}
 	}
-	private static void readSearchItems() throws FileNotFoundException, IOException {
-		BufferedReader br = new BufferedReader(new FileReader("torrents.csv"));
-		String line = null;
-		while (( line = br.readLine()) != null){
-			keyword = line.split(",")[0];
-			type = line.split(",")[0];
-			getAll = Boolean.parseBoolean(line.split(",")[0]);
-			
-			
-		}
+	private static void readSearchListFromFile() throws FileNotFoundException, IOException {
+		
+		searchList = Files.readAllLines(Paths.get("torrents.csv"), Charset.defaultCharset() );
+		
 	}
 
 	

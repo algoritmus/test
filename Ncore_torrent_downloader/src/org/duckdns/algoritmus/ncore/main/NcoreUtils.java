@@ -24,7 +24,7 @@ public class NcoreUtils {
 	static String episode = "";
 	static String filter = null;
 	
-	public static String login(WebDriver driver,String userName, String password){
+	public static String login(WebDriver driver,String userName, String password) throws Exception{
 		 	driver.get("https://ncore.cc/torrents.php?csoport_listazas=osszes_film");
 	        driver.findElement(By.xpath("//input[@class='beviteliMezo' and @name='nev']")).sendKeys("Algoritmus");
 	        driver.findElement(By.xpath("//input[@class='beviteliMezo' and @name='pass']")).sendKeys("NCorejelszo123");
@@ -36,10 +36,11 @@ public class NcoreUtils {
 	public static void findNewTorrents(WebDriver driver, Connection conn, String key, String filter, String type, boolean getAll){
 
 		try{
+			System.out.println("Search for: " + filter);
 			filter = escapeFilterString(filter);
 			doSearch(driver, filter, type);
 			List<WebElement> torrents = extractTorrentList(driver);
-			
+			System.out.println("Torrent found: " + torrents.size());
 			for(WebElement torrent:torrents){
 				extractTorrentInformations(torrent);
 				extractSeasonAndEpisodeInformation();
@@ -47,8 +48,9 @@ public class NcoreUtils {
 				if(!DBUtils.isTorrentAlreadyDownloaded(conn, imdbId, season, episode)){
 					DBUtils.insertTorrent(conn, imdbId, torrentName, season, episode);
 					downloadTorrentFile(key, torrentId, torrentName);
+					System.out.println("New torrent found: " + torrentName);
 				}else{
-					//System.out.println("Already downloaded:" + key);
+					System.out.println("Already downloaded: " + torrentName);
 				};
 
 				if(!getAll){
@@ -64,7 +66,7 @@ public class NcoreUtils {
 
 	}// end of searchTorrents
 
-	private static void extractSeasonAndEpisodeInformation() {
+	private static void extractSeasonAndEpisodeInformation() throws Exception{
 		Pattern pattern = Pattern.compile("^.*(S\\d\\d)\\.*(E\\d\\d)");
 		Matcher matcher = pattern.matcher(torrentName);
 		
@@ -79,24 +81,25 @@ public class NcoreUtils {
 		}
 	}
 
-	private static String escapeFilterString(String filter) {
+	private static String escapeFilterString(String filter) throws Exception{
 		filter=filter.replaceAll(" ", "%20");
 		return filter;
 	}
 
-	private static void extractTorrentInformations(WebElement torrent) {
+	private static void extractTorrentInformations(WebElement torrent) throws Exception{
 		WebElement torrent_txt = torrent.findElement(By.xpath(".//div[@class='torrent_txt']/a"));
 		torrentName = torrent_txt.getAttribute("title");
 		torrentId = torrent_txt.getAttribute("href").split("id=")[1];
 		imdbId = torrent.findElement(By.xpath(".//div[@class='siterank']/a")).getAttribute("href").split("title/")[1].replace("/", "");
 	}
 
-	private static List<WebElement> extractTorrentList(WebDriver driver) {
+	private static List<WebElement> extractTorrentList(WebDriver driver) throws Exception{
 		return driver.findElements(By.xpath("//div[@class='box_torrent']"));
 	}
 
-	private static void doSearch(WebDriver driver, String filter, String type) {
+	private static void doSearch(WebDriver driver, String filter, String type) throws Exception {
 		driver.get("https://ncore.cc/torrents.php?&tipus=all_own&miben=name&mire=" + filter + "&tipus=kivalasztottak_kozott&kivalasztott_tipus=" + type);
+		
 	}
 	
 	public static String getCurrentTimeStamp() {

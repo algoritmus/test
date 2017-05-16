@@ -31,9 +31,10 @@ public class DBUtils {
 			//auto increment ?
 		    // create table
 			stmt.executeUpdate("Create table torrents (id INT not null primary key GENERATED ALWAYS AS IDENTITY(START WITH 1, INCREMENT BY 1), imdbid varchar(30), name varchar(200), season varchar(3), episode varchar(3))");
+			System.out.println("Table created");
 		}catch(SQLException e){
 			if(e.getSQLState().equals("X0Y32")){
-				//Already exists
+				System.out.println("Table Already exists");
 				return;
 			}
 			e.printStackTrace();
@@ -44,6 +45,7 @@ public class DBUtils {
 		
 		try{
 			if(dropTable.equals("deleteTable")){
+				System.out.println("Dropping table !");
 				Statement stmt = conn.createStatement();
 				stmt.executeUpdate("Drop table torrents");
 			}
@@ -58,6 +60,7 @@ public class DBUtils {
 	
 	public static void insertTorrent(Connection conn, String imdbId, String name, String season, String episode)  {
 	    try{
+	    	System.out.println("Insert torrent to DB: " + name + "-" + imdbId);
 	    	Statement stmt = conn.createStatement();
 	    //auto increment ?
 	    	stmt.executeUpdate("insert into torrents (imdbid,name,season,episode) values ('" + imdbId + "','" + name +"','"+ season + "','" + episode + "')");
@@ -68,13 +71,16 @@ public class DBUtils {
 	}
 
 	public static boolean isTorrentAlreadyDownloaded(Connection conn, String imdbId, String season, String episode) throws SQLException {
-	    Statement stmt = conn.createStatement();
+		System.out.println("Checking torrent in DB: " + imdbId);
+		Statement stmt = conn.createStatement();
 	    //auto increment ?
 	    ResultSet rs = stmt.executeQuery("select count(*) from torrents where imdbid='" + imdbId + "' and season='" + season + "' and episode='" + episode + "'");
 	    rs.next();
 	    if(rs.getInt(1) != 0){
+	    	System.out.println("Latest episode of the season " + season + episode + " is already downloaded");
 	    	return true; 
 	    }else{
+	    	System.out.println("Not Found");
 	    	return false;
 	    }
 	   
