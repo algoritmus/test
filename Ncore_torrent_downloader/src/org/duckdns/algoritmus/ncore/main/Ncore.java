@@ -31,7 +31,7 @@ public class Ncore {
 		long start = System.currentTimeMillis();
 		
 		java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF); 
-		//String input = args[0];
+		String dropTable = args[0];
 		//String output = args[1];
 		
 
@@ -51,28 +51,15 @@ public class Ncore {
 
     	try{
 			
-			/*
-    		br = new BufferedReader(new InputStreamReader(new FileInputStream(input)));
-			bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(input),"UTF-8"));
-			String line = null;
-			List<String> searchItems = new ArrayList<String>();
-			
-			while  ((line = br.readLine()) != null ){
-				searchItems.add(line);
-			}
-			
-			
-				
-			
-			
-			String time = NcoreUtils.getCurrentTimeStamp();
-			*/
+
+    		
 			conn = DBUtils.connectionToDerby(null);
-			DBUtils.dropTable(conn);
+			
+			DBUtils.dropTable(conn, dropTable);
 			DBUtils.createTable(conn);
 			
     		String key = NcoreUtils.login(driver, "Algoritmus", "NCorejelszo123");
-			NcoreUtils.searchTorrents(driver, conn, key, "lucifer s02 720", "hdser", false);
+			NcoreUtils.findNewTorrents(driver, conn, key, "lucifer s02 720", "hdser", false);
 
 			
 			

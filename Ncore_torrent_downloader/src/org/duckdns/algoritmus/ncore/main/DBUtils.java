@@ -25,7 +25,6 @@ public class DBUtils {
 	    return conn;
 	  }
 	
-	
 	public static void createTable(Connection conn) {
 		try{
 			Statement stmt = conn.createStatement();
@@ -41,12 +40,13 @@ public class DBUtils {
 		}
 	}
 	
-	public static void dropTable(Connection conn) {
+	public static void dropTable(Connection conn, String dropTable) {
+		
 		try{
-			Statement stmt = conn.createStatement();
-			//auto increment ?
-		    // create table
-			stmt.executeUpdate("Drop table torrents");
+			if(dropTable.equals("deleteTable")){
+				Statement stmt = conn.createStatement();
+				stmt.executeUpdate("Drop table torrents");
+			}
 		}catch(SQLException e){
 			if(e.getSQLState().equals("42Y55")){
 				//Does not exists
@@ -67,7 +67,7 @@ public class DBUtils {
 		}
 	}
 
-	public static boolean isTorrentExists(Connection conn, String imdbId, String season, String episode) throws SQLException {
+	public static boolean isTorrentAlreadyDownloaded(Connection conn, String imdbId, String season, String episode) throws SQLException {
 	    Statement stmt = conn.createStatement();
 	    //auto increment ?
 	    ResultSet rs = stmt.executeQuery("select count(*) from torrents where imdbid='" + imdbId + "' and season='" + season + "' and episode='" + episode + "'");
